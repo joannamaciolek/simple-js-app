@@ -1,0 +1,22 @@
+body{
+  font-family: 'Rubik', sans-serif;
+  background-image: url("../img/background.png");
+}
+
+li{
+  padding:10px;
+}
+
+div{
+  background-color: white;
+  padding: 20px;
+}
+
+p{
+  font-size: 12px
+}
+
+img{
+  height: 80px;
+  width: auto;
+}
