@@ -1,4 +1,5 @@
-var repository = [
+var pokemonRepository = (function () {
+  var repository = [
   {
     name: 'Charmeleon',
     height: 1.1,
@@ -19,12 +20,32 @@ var repository = [
     height: 0.6 ,
     types :['sand' , 'earth']
   }
-];
+  ];
 
-for(var i = 0, l = repository.length; i < l; i++) {
-  if(repository[i].height > 1.1) {
-    document.write( '<li>' + repository[i].name + ' (height:' + repository[i].height + ') Wow that is BIG !');
-  } else {
-document.write( '<li>' + repository[i].name + ' (height:' + repository[i].height + ')');
+  function add(item) {
+    if (typeof item === 'object' ){
+      repository.push(item);
+    }else{
+      console.log('new item is not an object therefore it cannot be added');
+    }
+  }
+
+  function getAll() {
+    return repository;
 }
-}
+
+  return {
+    add: add,
+    getAll: getAll
+};
+
+} ) ();
+
+pokemonRepository.getAll().forEach(function (eachName){
+    if(eachName.height > 1.1) {
+      document.write( '<li>' + eachName.name + ' (height:' + eachName.height + ') Wow that is BIG !');
+     }
+    else {
+      document.write( '<li>' + eachName.name + ' (height:' + eachName.height + ')');
+    }
+});
