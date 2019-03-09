@@ -4,6 +4,7 @@ var pokemonRepository = (function () {
   var apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
   function loadList() {
+      //fetches the data from API
       return fetch(apiUrl, {
        method: 'GET'
      }).then(function (response) {
@@ -14,6 +15,7 @@ var pokemonRepository = (function () {
             name: item.name,
             detailsUrl: item.url
           };
+          //adds the data to repository
           add(pokemon);
         });
       }).catch(function (e) {
@@ -46,11 +48,11 @@ var pokemonRepository = (function () {
 
     //executes showDetails function if button is clicked
     $button.addEventListener('click',function(event){
-      showDetails(eachPokemon.name);
+      showDetails(eachPokemon);
     });
   }
 
-   //prints gets pokemons details in the console by clicking on it
+   //prints pokemons details in the console by clicking on the button
   function showDetails(item) {
     pokemonRepository.loadDetails(item).then(function () {
       console.log(item);
@@ -72,9 +74,10 @@ var pokemonRepository = (function () {
     return repository;
   }
 
+  //loads detailed data for each pokemon using detailsUrl property
   function loadDetails(item) {
     var url = item.detailsUrl;
-    return fetch('https://pokeapi.co/api/v2/pokemon/').then(function (response) {
+    return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
       // Now we add the details to the item
@@ -97,8 +100,8 @@ var pokemonRepository = (function () {
 
 } ) ();
 
+  // Loading the data from API
 pokemonRepository.loadList().then(function() {
-  // Now the data is loaded!
   // accessing pokemon repository & running function over each object in repository
   pokemonRepository.getAll().forEach(function (eachPokemon){
     //executing addListItem function for each object in pokemon repository
